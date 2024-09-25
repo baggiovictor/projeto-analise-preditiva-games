@@ -44,7 +44,7 @@ O código fornecido demonstra várias operações de manipulação de dados no M
 
 1. Conexão ao cluster:
 ```python
-uri = "mongodb+srv://root:root@cluster2.4aum8c5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster2"
+uri = "mongodb+srv://user:senha@cluster2.4aum8c5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster2"
 client = MongoClient(uri)
 db = client['videogames']
 collection = db['videogames']
