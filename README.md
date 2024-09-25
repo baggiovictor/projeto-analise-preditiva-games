@@ -1,4 +1,4 @@
-# Análise de Vendas de Videogames: Aplicação de MongoDB Atlas como Data Lake
+# Pipeline de analise de vendas de video games
 
 Aluno: Victor Hugo Baggio Alves
 
