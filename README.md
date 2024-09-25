@@ -79,6 +79,8 @@ Estas operações demonstram as inserções em massa, consultas flexíveis, atua
 
 A escolha do MongoDB Atlas como Data Lake para a indústria de videogames é ideal devido à sua flexibilidade para lidar com diversos tipos de dados, escalabilidade automática para acompanhar o crescimento do setor, modelo de dados adaptável à constante evolução dos jogos, capacidades analíticas integradas, facilidade de conexão com ferramentas de BI, segurança robusta para dados sensíveis e gerenciamento simplificado que libera a equipe para focar na análise estratégica em vez da manutenção da infraestrutura. Essa abordagem completa permite não só analisar as vendas atuais, mas também incorporar dados futuros de diversas fontes, criando um ambiente unificado e escalável para insights abrangentes sobre o mercado de jogos.
 
+### https://cloud.mongodb.com/v2/61928250173241641d5e8af9#/clusters
+
 ---
 
 Dataset: https://www.kaggle.com/datasets/gregorut/videogamesales
@@ -86,3 +88,4 @@ Dataset: https://www.kaggle.com/datasets/gregorut/videogamesales
 Este dataset contém uma lista de videogames com vendas superiores a 100.000 cópias. Foi gerado por meio de um scrape do site vgchartz.com.
 
 [[Link para o Colab]](https://colab.research.google.com/drive/1RS7Sv9lGHmktiwjneEsMBmEhqS4LlNY8#scrollTo=9R8dTqvc356S)
+
