@@ -1,6 +1,7 @@
 # Projeto de análise preditiva
 
 Aluno: Victor Hugo Baggio Alves
+       Vinicius Ochner
 
 ## a) Domínio do Problema
 
