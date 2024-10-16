@@ -1,4 +1,4 @@
-# Pipeline de analise de vendas de video games
+# Projeto de análise preditiva
 
 Aluno: Victor Hugo Baggio Alves
 
@@ -83,9 +83,71 @@ A escolha do MongoDB Atlas como Data Lake para a indústria de videogames é ide
 
 ---
 
+# Pré-processamento dos Dados e Análise Descritiva
+
+Após a importação e armazenamento inicial dos dados no MongoDB Atlas, foi realizado uma série de etapas de pré-processamento e análise descritiva para melhor compreender e preparar os dados para análises mais aprofundadas.
+
+### 1. Limpeza de Dados
+
+```python
+print("Valores nulos por coluna:")
+print(df.isnull().sum())
+```
+
+Em seguida, foi removido as linhas que continham valores nulos para garantir a integridade dos dados:
+
+```python
+df_clean = df.dropna()
+print(f"Linhas removidas: {len(df) - len(df_clean)}")
+```
+
+### 2. Análise Descritiva dos Dados (ADD)
+
+Foi feito  uma análise descritiva para entender melhor as características estatísticas dos nossos dados:
+
+```python
+print("Estatísticas descritivas:")
+print(df_clean.describe())
+
+print("\nTipos de dados:")
+print(df_clean.dtypes)
+```
+
+Esta análise  forneceu informações sobre a distribuição dos dados, incluindo médias, medianas, valores mínimos e máximos para as variáveis numéricas, bem como os tipos de dados de cada coluna.
+
+### 3. Transformação de Variáveis Categóricas
+
+Para facilitar análises estatísticas futuras, foi ajustado as variáveis categóricas 'genero', 'distribuidora' e 'plataforma' em categorias numéricas:
+
+```python
+for col in ['genero', 'distribuidora', 'plataforma']:
+    df_clean[f'{col}_cat'] = df_clean[col].astype('category').cat.codes
+    print(f"\nMapeamento de {col}:")
+    print(dict(enumerate(df_clean[col].astype('category').cat.categories)))
+```
+
+Este ajuste nos permite utilizar estas variáveis em modelos estatísticos que requerem entradas numéricas.
+
+### 4. Análise Exploratória dos Dados (AED)
+
+Por fim, foi realizado uma análise exploratória mais profunda, incluindo visualizações:
+
+1. Matriz de Correlação: Criamos uma matriz de correlação entre as variáveis numéricas de vendas para identificar possíveis relações entre diferentes mercados.
+
+2. Top 10 Gêneros: Analisamos os 10 gêneros de jogos com maiores vendas globais, fornecendo insights sobre as preferências do mercado.
+
+3. Distribuição de Jogos por Ano: Visualizamos a distribuição do número de jogos lançados ao longo dos anos, permitindo identificar tendências temporais na indústria.
+
+Estas visualizações nos permitem extrair insights valiosos sobre as tendências de vendas, popularidade de gêneros e evolução do mercado de jogos ao longo do tempo.
+
+O pré-processamento e a análise descritiva realizados fornecem uma base sólida para análises mais aprofundadas e para o desenvolvimento de modelos preditivos relacionados à indústria de jogos. Eles permitem entender melhor a estrutura e as características dos dados, identificar possíveis problemas ou outliers, e começar a formular hipóteses sobre os fatores que influenciam o sucesso das vendas de videogames.
+
+
+# Iformações
+
 Dataset: https://www.kaggle.com/datasets/gregorut/videogamesales
 
 Este dataset contém uma lista de videogames com vendas superiores a 100.000 cópias. Foi gerado por meio de um scrape do site vgchartz.com.
 
 [[Link para o Colab]](https://colab.research.google.com/drive/1RS7Sv9lGHmktiwjneEsMBmEhqS4LlNY8#scrollTo=9R8dTqvc356S)
-
+[[mongodb]](https://cloud.mongodb.com/v2/61928250173241641d5e8af9#/clusters)
