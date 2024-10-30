@@ -1,25 +1,42 @@
-# Projeto de análise preditiva
+# Análise Preditiva de Vendas de Videogames
+**Autores:**
+- Victor Hugo Baggio Alves
+- Vinicius Ochner
 
-Aluno: Victor Hugo Baggio Alves
-       Vinicius Ochner
+## Sumário
+1. [Visão Geral](#visão-geral)
+2. [Domínio do Problema](#domínio-do-problema)
+3. [Arquitetura de Dados](#arquitetura-de-dados)
+4. [Metadados do Projeto](#metadados-do-projeto)
+5. [Fonte de Dados](#fonte-de-dados)
+6. [Conexão com Banco](#operações-principais)
+7. [Metodologia](#metodologia)
+8. [Análise Exploratória](#análise-exploratória)
+9. [Recursos e Links](#recursos-e-links)
 
-## a) Domínio do Problema
+## Visão Geral
+Este projeto visa realizar uma análise preditiva do mercado de videogames, utilizando um conjunto de dados abrangente sobre vendas de jogos que ultrapassaram 100.000 cópias. A análise combina técnicas de ciência de dados com um banco de dados NoSQL para fornecer insights valiosos sobre tendências e padrões do mercado.
 
-O domínio do problema apresentado refere-se à análise de dados de vendas de videogames. O dataset utilizado contém informações sobre jogos que venderam mais de 100.000 cópias, incluindo dados como nome do jogo, plataforma, ano de lançamento, gênero, editora e vendas em diferentes regiões geográficas.
+## Domínio do Problema
+O setor de videogames representa um mercado global em constante expansão, caracterizado por:
 
-Este domínio é particularmente interessante para Análise de Dados (AP) devido a:
+- **Volume de Dados:** Geração massiva de dados de vendas e métricas de engajamento
+- **Variedade de Informações:** Combinação de dados categóricos (gênero, plataforma) e numéricos (vendas)
+- **Valor Estratégico:** Insights críticos para publishers, desenvolvedores e investidores
 
-1. Volume de dados: O setor de videogames gera uma quantidade massiva de dados de vendas.
-2. Variedade: Os dados incluem informações categóricas (como gênero e plataforma) e numéricas (vendas).
-3. Valor: Análises desses dados podem fornecer insights valiosos para publishers, desenvolvedores e investidores.
+## Arquitetura de Dados
 
-## b) Justificativa da Escolha do Modelo NoSQL
+### Justificativa do MongoDB Atlas
+A escolha do MongoDB Atlas como solução de banco de dados se baseia em:
 
-A escolha do MongoDB Atlas para este problema se justifica por sua flexibilidade em lidar com esquemas variáveis, ideal para dados de jogos, escalabilidade automática para acomodar grandes volumes de vendas, performance otimizada para leitura essencial em análises, suporte a dados semi-estruturados que podem evoluir com o tempo e, por ser um serviço gerenciado na nuvem, elimina a necessidade de gerenciar infraestrutura, permitindo total foco na análise de dados.
+1. **Flexibilidade:** Esquema dinâmico para acomodar dados variáveis
+2. **Escalabilidade:** Capacidade de crescimento automático conforme necessário
+3. **Performance:** Otimização para operações de leitura em análises
+4. **Gerenciamento:** Serviço totalmente gerenciado na nuvem
+5. **Integração:** Facilidade de conexão com ferramentas de análise
 
-## c) Modelo de Exemplo
-
-No MongoDB Atlas, os dados são armazenados em formato de documento. Um exemplo de documento para este dataset seria:
+### Modelo de Dados
+Exemplo de documento no MongoDB:
 
 ```json
 {
@@ -37,13 +54,80 @@ No MongoDB Atlas, os dados são armazenados em formato de documento. Um exemplo 
 }
 ```
 
-Este modelo permite armazenar todos os dados relevantes de cada jogo em um único documento.
+## Metadados do Projeto
 
-## d) Exemplos de Manipulação de Dados
+### Estrutura dos Metadados
+```json
+{
+    "name": "analise-vendas-videogames",
+    "owner_org": "catolica",
+    "title": "Análise de Vendas de Videogames",
+    "maintainer": "Victor Hugo Baggio Alves, Vinicius Ochner",
+    "maintainer_email": "victor.alves@catolicasc.edu.br",
+    "notes": "# Análise de Vendas de Videogames\r\n\r\nDataset contendo informações sobre jogos que venderam mais de 100.000 cópias, incluindo dados como:\r\n- Nome do jogo\r\n- Plataforma\r\n- Ano de lançamento\r\n- Gênero\r\n- Editora\r\n- Vendas em diferentes regiões geográficas",
+    "state": "active",
+    "resources": [{
+        "name": "games.csv",
+        "description": "Dataset completo de vendas de videogames com mais de 100.000 cópias vendidas",
+        "format": "CSV",
+        "url": "",
+        "upload": "data/games.csv"
+    }],
+    "groups": [
+        {"name": "esportes"},
+        {"name": "rpg"}
+    ],
+    "tags": [
+        {"name": "videogames"},
+        {"name": "vendas"},
+        {"name": "jogos"},
+        {"name": "entretenimento"},
+        {"name": "análise-preditiva"}
+    ],
+    "extras": [
+        {
+            "key": "Fonte dos Dados",
+            "value": "Dataset obtido via kaggle"
+        },
+        {
+            "key": "Período",
+            "value": "Contém dados históricos de vendas de videogames"
+        },
+        {
+            "key": "Metodologia",
+            "value": "Dados coletados através de técnicas de etl, incluindo apenas jogos com vendas superiores a 100.000 cópias"
+        }
+    ]
+}
+```
 
-O código fornecido demonstra várias operações de manipulação de dados no MongoDB Atlas:
+### Descrição dos Campos de Metadados
 
-1. Conexão ao cluster:
+1. **Identificação Básica**
+   - `name`: Identificador único do dataset
+   - `owner_org`: Organização proprietária
+   - `title`: Título descritivo do dataset
+   - `state`: Estado atual do dataset (ativo)
+
+2. **Responsabilidade e Contato**
+   - `maintainer`: Responsáveis pelo dataset
+   - `maintainer_email`: Email para contato
+
+3. **Recursos (Resources)**
+   - Nome do arquivo: games.csv
+   - Formato: CSV
+   - Descrição detalhada do conteúdo:
+        - Contém dados de vendas por país, ano, categoria e distribuidora
+   - Método de upload local
+
+4. **Categorização**
+   - `groups`: Categorias principais (esportes, rpg)
+   - `tags`: Palavras-chave para indexação
+   
+
+### Operações Principais
+
+1. **Conexão ao Cluster:**
 ```python
 uri = "mongodb+srv://user:senha@cluster2.4aum8c5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster2"
 client = MongoClient(uri)
@@ -51,104 +135,47 @@ db = client['videogames']
 collection = db['videogames']
 ```
 
-2. Inserção de dados:
+2. **Operações CRUD Básicas:**
+- Inserção: `collection.insert_many(data_list)`
+- Consulta: `collection.find()`
+- Atualização: `collection.update_one()`
+- Remoção: `collection.delete_one()`
+
+## Metodologia
+
+### Pré-processamento dos Dados
+
+1. **Limpeza de Dados:**
 ```python
-collection.insert_many(data_list)
-```
-
-3. Consulta de dados:
-```python
-all_documents = collection.find()
-for doc in all_documents:
-    pprint(doc)
-```
-
-4. Atualização de dados:
-```python
-collection.update_one({}, {'$set': {'Publisher': 'Nintendo Updated'}})
-```
-
-5. Remoção de dados:
-```python
-collection.delete_one({})
-```
-
-Estas operações demonstram as inserções em massa, consultas flexíveis, atualizações pontuais e remoções de documentos.
-
-## e) Justificativa para uso do MongoDB Atlas como Data Lake
-
-
-A escolha do MongoDB Atlas como Data Lake para a indústria de videogames é ideal devido à sua flexibilidade para lidar com diversos tipos de dados, escalabilidade automática para acompanhar o crescimento do setor, modelo de dados adaptável à constante evolução dos jogos, capacidades analíticas integradas, facilidade de conexão com ferramentas de BI, segurança robusta para dados sensíveis e gerenciamento simplificado que libera a equipe para focar na análise estratégica em vez da manutenção da infraestrutura. Essa abordagem completa permite não só analisar as vendas atuais, mas também incorporar dados futuros de diversas fontes, criando um ambiente unificado e escalável para insights abrangentes sobre o mercado de jogos.
-
-### https://cloud.mongodb.com/v2/61928250173241641d5e8af9#/clusters
-
----
-
-# Pré-processamento dos Dados e Análise Descritiva
-
-Após a importação e armazenamento inicial dos dados no MongoDB Atlas, foi realizado uma série de etapas de pré-processamento e análise descritiva para melhor compreender e preparar os dados para análises mais aprofundadas.
-
-### 1. Limpeza de Dados
-
-```python
+# Verificação de valores nulos
 print("Valores nulos por coluna:")
 print(df.isnull().sum())
-```
 
-Em seguida, foi removido as linhas que continham valores nulos para garantir a integridade dos dados:
-
-```python
+# Remoção de registros incompletos
 df_clean = df.dropna()
-print(f"Linhas removidas: {len(df) - len(df_clean)}")
 ```
 
-### 2. Análise Descritiva dos Dados (ADD)
-
-Foi feito  uma análise descritiva para entender melhor as características estatísticas dos nossos dados:
-
+2. **Transformação de Variáveis:**
 ```python
-print("Estatísticas descritivas:")
-print(df_clean.describe())
-
-print("\nTipos de dados:")
-print(df_clean.dtypes)
-```
-
-Esta análise  forneceu informações sobre a distribuição dos dados, incluindo médias, medianas, valores mínimos e máximos para as variáveis numéricas, bem como os tipos de dados de cada coluna.
-
-### 3. Transformação de Variáveis Categóricas
-
-Para facilitar análises estatísticas futuras, foi ajustado as variáveis categóricas 'genero', 'distribuidora' e 'plataforma' em categorias numéricas:
-
-```python
+# Codificação de variáveis categóricas
 for col in ['genero', 'distribuidora', 'plataforma']:
     df_clean[f'{col}_cat'] = df_clean[col].astype('category').cat.codes
-    print(f"\nMapeamento de {col}:")
-    print(dict(enumerate(df_clean[col].astype('category').cat.categories)))
 ```
 
-Este ajuste nos permite utilizar estas variáveis em modelos estatísticos que requerem entradas numéricas.
+### Análise Exploratória
 
-### 4. Análise Exploratória dos Dados (AED)
+A análise exploratória inclui:
+1. Matriz de correlação entre variáveis de vendas
+2. Análise dos top 10 gêneros por vendas globais
+3. Distribuição temporal de lançamentos
+4. Estatísticas descritivas por região
 
-Por fim, foi realizado uma análise exploratória mais profunda, incluindo visualizações:
+## Recursos e Links
 
-1. Matriz de Correlação: Criamos uma matriz de correlação entre as variáveis numéricas de vendas para identificar possíveis relações entre diferentes mercados.
+- **Dataset:** [Video Game Sales - Kaggle](https://www.kaggle.com/datasets/gregorut/videogamesales)
+- **Notebook:** [Google Colab](https://colab.research.google.com/drive/1RS7Sv9lGHmktiwjneEsMBmEhqS4LlNY8#scrollTo=9R8dTqvc356S)
+- **MongoDB Atlas:** [Cluster](https://cloud.mongodb.com/v2/61928250173241641d5e8af9#/clusters)
 
-2. Top 10 Gêneros: Analisamos os 10 gêneros de jogos com maiores vendas globais, fornecendo insights sobre as preferências do mercado.
-
-3. Distribuição de Jogos por Ano: Visualizamos a distribuição do número de jogos lançados ao longo dos anos, permitindo identificar tendências temporais na indústria.
-
-Estas visualizações nos permitem extrair insights valiosos sobre as tendências de vendas, popularidade de gêneros e evolução do mercado de jogos ao longo do tempo.
-
-O pré-processamento e a análise descritiva realizados fornecem uma base sólida para análises mais aprofundadas e para o desenvolvimento de modelos preditivos relacionados à indústria de jogos. Eles permitem entender melhor a estrutura e as características dos dados, identificar possíveis problemas ou outliers, e começar a formular hipóteses sobre os fatores que influenciam o sucesso das vendas de videogames.
-
-
-# Iformações
-
-Dataset: https://www.kaggle.com/datasets/gregorut/videogamesales
-
-Este dataset contém uma lista de videogames com vendas superiores a 100.000 cópias. Foi gerado por meio de um scrape do site vgchartz.com.
-
-[[Link para o Colab]](https://colab.research.google.com/drive/1RS7Sv9lGHmktiwjneEsMBmEhqS4LlNY8#scrollTo=9R8dTqvc356S)
-[[mongodb]](https://cloud.mongodb.com/v2/61928250173241641d5e8af9#/clusters)
+### Notas Técnicas
+- Critério de inclusão: Jogos com vendas > 100.000 cópias
+- Período de análise: Histórico completo disponível no dataset
